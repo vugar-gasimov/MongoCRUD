@@ -1,12 +1,11 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const logger = require("morgan");
 const cors = require("cors");
 
 const contactsRouter = require("./routes/api/contacts");
 
 const app = express();
-mongoose.connect();
+
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
 app.use(logger(formatsLogger));
