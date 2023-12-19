@@ -1,5 +1,5 @@
 {
-  "name": "contact-management-api",
+  "name": "mongo_crud",
   "version": "0.0.0",
   "private": true,
   "scripts": {
