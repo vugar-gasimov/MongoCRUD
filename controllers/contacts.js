@@ -2,7 +2,7 @@ const Contact = require("../models/contact");
 const { CustomError, ctrlWrapper } = require("../helpers");
 
 const getAllContacts = async (req, res) => {
-  const result = await Contact.find();
+  const result = await Contact.find({}, "-createdAt -updatedAt -__v");
   res.json(result);
 };
 
@@ -11,14 +11,14 @@ const addAContact = async (req, res) => {
   res.status(201).json(result);
 };
 
-// const getContactById = async (req, res) => {
-//   const { id } = req.params;
-//   const result = await contacts.getContactById(id);
-//   if (!result) {
-//     throw CustomError(404, "Not found");
-//   }
-//   res.json(result);
-// };
+const getContactById = async (req, res) => {
+  const { id } = req.params;
+  const result = await Contact.findOne({ _id: id });
+  if (!result) {
+    throw CustomError(404, "Not found");
+  }
+  res.json(result);
+};
 
 // const updateContactById = async (req, res) => {
 //   const { id } = req.params;
@@ -42,7 +42,7 @@ const addAContact = async (req, res) => {
 module.exports = {
   getAllContacts: ctrlWrapper(getAllContacts),
   addAContact: ctrlWrapper(addAContact),
-  // getContactById: ctrlWrapper(getContactById),
+  getContactById: ctrlWrapper(getContactById),
   // updateContactById: ctrlWrapper(updateContactById),
   // removeContactById: ctrlWrapper(removeContactById),
 };
