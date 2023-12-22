@@ -13,7 +13,10 @@ const addAContact = async (req, res) => {
 
 const getContactById = async (req, res) => {
   const { id } = req.params;
-  const result = await Contact.findOne(id, "-createdAt -updatedAt -__v");
+  const result = await Contact.findOne(
+    { _id: id },
+    "-createdAt -updatedAt -__v"
+  );
   if (!result) {
     throw CustomError(404, "Not found");
   }
@@ -22,12 +25,10 @@ const getContactById = async (req, res) => {
 
 const updateContactById = async (req, res) => {
   const { id } = req.params;
-  const result = await Contact.findByIdAndUpdate(
-    id,
-    req.body,
-    { new: true },
-    "-createdAt -updatedAt -__v"
-  );
+  const result = await Contact.findByIdAndUpdate(id, req.body, {
+    new: true,
+    select: "-createdAt -updatedAt -__v",
+  });
   if (!result) {
     throw CustomError(404, "Contact not found");
   }

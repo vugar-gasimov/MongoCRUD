@@ -18,6 +18,12 @@ router.put(
 );
 
 router.patch(
+  "/:id",
+  isValidId,
+  validateBody(schemas.addSchema),
+  ctrl.updateFavoriteById
+);
+router.patch(
   "/:id/favorite",
   isValidId,
   validateBody(schemas.updateFavoriteSchema),
