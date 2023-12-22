@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const handleMongooseError = require("../helpers/handleMongooseError");
+
 const contactSchema = new mongoose.Schema(
   {
     name: {
